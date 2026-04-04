@@ -22,9 +22,12 @@ jobs:
 
       - name: Update vulnerable gems
         run: |
-          bundle update
+          bundle update --patch rails
+          bundle update json loofah nokogiri rack
           echo "=== Key versions after update ==="
           bundle list | grep -E "rails |activestorage |json |loofah |nokogiri |rack "
+          echo "=== Available rails versions ==="
+          gem search ^rails$ --versions --pre 2>/dev/null | head -3
           bundle exec bundle-audit --update || true
 
       - name: Commit and push if changed
