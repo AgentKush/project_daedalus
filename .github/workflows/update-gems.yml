@@ -1,7 +1,9 @@
 name: "Update Vulnerable Gems"
 
 on:
-  workflow_dispatch:  # Manual trigger only
+  push:
+    branches: [ "fix/security-gem-updates" ]
+  workflow_dispatch:
 
 permissions:
   contents: write
