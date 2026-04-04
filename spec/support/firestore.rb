@@ -16,9 +16,7 @@ RSpec.configure do |config|
     end
 
     # Stub SiteContent.find globally so info page specs don't hit Firestore
-    if defined?(SiteContent)
-      allow(SiteContent).to receive(:find).and_return(nil)
-    end
+    allow(SiteContent).to receive(:find).and_return(nil) if defined?(SiteContent)
   end
 
   # Reset memoized Firestore clients after each test to prevent
