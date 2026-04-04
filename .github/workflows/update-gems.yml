@@ -22,7 +22,7 @@ jobs:
 
       - name: Update vulnerable gems
         run: |
-          bundle update activestorage json loofah nokogiri rack
+          bundle update activestorage json loofah nokogiri rack rails
           bundle exec bundle-audit --update || true
 
       - name: Commit and push if changed
