@@ -46,7 +46,7 @@ function stripLeadingH1(md) {
   const hasBuildTimeReadme = !fallbackNote;
 
   subscribe("mods", "./../../../data/mods.json", d => d, async (mods, status) => {
-    if (status.source !== "rest" && status.source !== "websdk") return;
+    if (!status.live) return;
     const me = mods.find(m => slug(m.author) === authorSlug && slug(m.name) === nameSlug);
     if (!me) return;
 

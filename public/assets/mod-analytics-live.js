@@ -97,7 +97,7 @@ function fmtDate(iso) {
 
   // Subscribe to all mods (same call the listing makes — browser caches it)
   subscribe("mods", "./../../../data/mods.json", d => d, async (mods, status) => {
-    if (status.source !== "rest" && status.source !== "websdk") return; // need live timestamps
+    if (!status.live) return; // need live data (covers rest/rest+backfill/websdk/websdk+backfill)
 
     // Find this mod by (author, name) slug match
     const me = mods.find(m =>
