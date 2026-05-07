@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title or "ProjectDaedalus — Icarus Mods & Tools" }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ description or 'Browse and download mods and tools for the Icarus survival game.' }}">
+  <meta property="og:title" content="{{ title or 'ProjectDaedalus' }}">
+  <meta property="og:description" content="{{ description or 'Browse and download mods and tools for the Icarus survival game.' }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ProjectDaedalus">
+  {% if og_image %}<meta property="og:image" content="{{ og_image }}">{% endif %}
+  <link rel="icon" type="image/png" href="{{ rootPath }}assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://giscus.app">
+  <link rel="preconnect" href="https://api.github.com">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{{ rootPath }}assets/firebase-config.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            icarus: {
+              100: '#fcefd2', 200: '#f9dea4', 300: '#f7ce77', 400: '#f4bd49',
+              500: '#f1ad1c', 600: '#c18a16', 700: '#916811', 800: '#60450b', 900: '#302306'
+            }
+          },
+          backgroundImage: {
+            'topo-light': "url('{{ rootPath }}assets/img/bg-topography-light.svg')",
+            'topo-dark': "url('{{ rootPath }}assets/img/bg-topography-dark.svg')"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+    .gold-line { height: 2px; background: linear-gradient(90deg, transparent, #f1ad1c, transparent); }
+    .row-lift { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .row-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .info-card, .tool-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .info-card:hover, .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
+    .paper { box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
+    .source-badge { display:inline-flex; align-items:center; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:600; background:rgba(241,173,28,.1); color:#f1ad1c; margin-left:6px; vertical-align:middle; }
+    /* Headings */
+    .prose h1 { font-size: 1.6em; font-weight: 800; margin-top: 1.2em; margin-bottom: 0.4em; color: #f1ad1c; }
+    .prose h2 { font-size: 1.4em; font-weight: 700; margin-top: 1em; margin-bottom: 0.4em; color: #f1ad1c; border-bottom: 1px solid rgba(241,173,28,.25); padding-bottom: 0.2em; }
+    .prose h3 { font-size: 1.2em; font-weight: 600; margin-top: 0.8em; margin-bottom: 0.3em; color: #f1ad1c; }
+    .prose h4 { font-size: 1.05em; font-weight: 600; margin-top: 0.6em; margin-bottom: 0.3em; }
+    .prose h5, .prose h6 { font-size: 1em; font-weight: 600; margin-top: 0.5em; }
+    /* Paragraphs / inline */
+    .prose p { margin: 0.6em 0; line-height: 1.6; }
+    .prose strong { font-weight: 700; color: inherit; }
+    .prose em { font-style: italic; }
+    .prose a { color: #f1ad1c; text-decoration: none; }
+    .prose a:hover { color: #f4bd49; text-decoration: underline; }
+    /* Lists */
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin: 0.5em 0; }
+    .prose ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5em 0; }
+    .prose li { margin: 0.25em 0; line-height: 1.5; }
+    .prose li > ul, .prose li > ol { margin: 0.25em 0; }
+    /* Code */
+    .prose code { background: rgba(241,173,28,.1); padding: 1px 5px; border-radius: 3px; font-size: 0.9em; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .prose pre { background: rgba(15,23,42,.6); padding: 0.9em 1em; border-radius: 6px; overflow-x: auto; margin: 0.8em 0; font-size: 0.9em; line-height: 1.45; border: 1px solid rgba(148,163,184,.2); }
+    .prose pre code { background: transparent; padding: 0; border-radius: 0; font-size: 1em; }
+    /* Blockquote */
+    .prose blockquote { border-left: 3px solid #f1ad1c; padding-left: 1em; opacity: .9; margin: 0.8em 0; font-style: italic; }
+    /* Horizontal rule */
+    .prose hr { border: 0; border-top: 1px solid rgba(148,163,184,.3); margin: 1.5em 0; }
+    /* Tables (GFM) */
+    .prose table { width: auto; max-width: 100%; border-collapse: collapse; margin: 0.8em 0; font-size: 0.95em; display: block; overflow-x: auto; }
+    .prose thead { background: rgba(241,173,28,.08); }
+    .prose th, .prose td { border: 1px solid rgba(148,163,184,.25); padding: 0.4em 0.7em; text-align: left; vertical-align: top; }
+    .prose th { font-weight: 600; color: #f1ad1c; }
+    .prose tbody tr:nth-child(even) { background: rgba(15,23,42,.25); }
+    /* Images: behave well as both block screenshots and inline shields.io badges */
+    .prose img { max-width: 100%; height: auto; vertical-align: middle; }
+    .prose p > img,
+    .prose p > a > img,
+    .prose img[src*="shields.io"],
+    .prose img[src*="badge"] { display: inline-block; margin: 0 2px; }
+    /* When badges are stacked in their own paragraph, give them a little breathing room */
+    .prose p:has(> img:only-child) { margin: 0.4em 0; }
+    .pag-btn { display:inline-flex; align-items:center; justify-content:center; min-width:32px; height:32px; padding:0 10px; margin:0 2px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; user-select:none; }
+    @media (max-width: 640px) {
+      .pag-btn { min-width: 28px; padding: 0 6px; font-size: 12px; margin: 0 1px; height: 30px; }
+      .pag-ellipsis { min-width: 20px; height: 30px; }
+    }
+    .pag-btn:hover { background: rgba(241,173,28,.15); color:#f1ad1c; }
+    .pag-btn.active { background:#3b82f6; color:#fff; cursor:default; }
+    .pag-btn.disabled { opacity:.4; cursor:not-allowed; }
+    .pag-ellipsis { display:inline-flex; align-items:center; justify-content:center; min-width:32px; height:32px; color:#64748b; }
+    #back-to-top {
+      position: fixed; right: 14px; bottom: 56px; z-index: 9998;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #f1ad1c; color: white; font-size: 22px; font-weight: 700;
+      border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.4);
+      display: none; align-items: center; justify-content: center;
+      transition: transform .15s ease, background .15s ease, opacity .2s ease;
+    }
+    #back-to-top:hover { background: #c18a16; transform: translateY(-2px); }
+    #back-to-top.visible { display: inline-flex; }
+  </style>
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') document.documentElement.classList.remove('dark');
+      else if (saved === 'dark') document.documentElement.classList.add('dark');
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.add('dark');
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-fixed lg:text-base bg-topo-light dark:bg-topo-dark bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300">
+  <header class="w-screen">
+    <div class="bg-gradient-to-b from-slate-600 via-slate-500 to-slate-200 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 text-slate-800 dark:text-slate-300 md:pt-4 md:pb-12 md:px-5 md:flex md:flex-auto md:items-center md:justify-between p-4">
+      <div class="flex items-center justify-start flex-1 min-w-0">
+        <a href="{{ rootPath }}home/" class="mr-2"><img width="64" height="64" alt="Daedalus Logo" src="{{ rootPath }}assets/img/daedalus-logo.png"></a>
+        <a class="drop-shadow-md text-2xl font-bold leading-7 no-underline text-icarus-500 sm:truncate sm:text-4xl sm:py-1 sm:tracking-tight" href="{{ rootPath }}home/">Project Daedalus</a>
+      </div>
+      <div class="flex items-center mt-4 md:mt-0 md:ml-4">
+        <a class="inline-flex items-center px-4 py-2 font-medium no-underline text-icarus-500 hover:text-blue-500" href="{{ rootPath }}">Mods</a>
+        <a class="inline-flex items-center px-4 py-2 font-medium no-underline text-icarus-500 hover:text-blue-500" href="{{ rootPath }}tools.html">Tools</a>
+        <a class="inline-flex items-center px-4 py-2 font-medium no-underline text-icarus-500 hover:text-blue-500" href="{{ rootPath }}requests.html">Requests</a>
+        <a class="inline-flex items-center px-4 py-2 font-medium no-underline text-icarus-500 hover:text-blue-500" href="{{ rootPath }}info.html">Info</a>
+        <button type="button" id="theme-toggle" class="inline-flex items-center justify-center w-9 h-9 ml-2 rounded-lg text-icarus-500 hover:text-icarus-400 hover:bg-slate-700/50 transition-colors" title="Toggle dark/light mode">
+          <span id="theme-icon" class="text-lg">&#127769;</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main class="flex flex-row justify-center w-screen">
+    <div class="w-[95%] xl:w-[90%] mx-auto p-2 mt-5 mb-12 rounded bg-gradient-to-b from-slate-300 to-slate-100 dark:from-slate-900 dark:to-slate-700 paper">
+      {{ content | safe }}
+    </div>
+  </main>
+  <footer class="text-center text-xs text-slate-500 pb-8">
+    <p>This is a live site for Icarus mods and tools. Source on <a href="https://github.com/DonovanMods/project_daedalus" class="text-icarus-500 hover:underline">GitHub</a>.</p>
+  </footer>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-icon');
+    function refreshIcon() { icon.innerHTML = document.documentElement.classList.contains('dark') ? '&#127769;' : '&#9728;&#65039;'; }
+    refreshIcon();
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      refreshIcon();
+    });
+  </script>
+  <button id="back-to-top" type="button" title="Back to top" aria-label="Back to top">&uarr;</button>
+  <script>
+    (function () {
+      const btn = document.getElementById('back-to-top');
+      function update() {
+        if (window.scrollY > 400) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      update();
+    })();
+  </script>
+</body>
+</html>

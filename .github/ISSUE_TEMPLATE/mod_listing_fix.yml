@@ -1,0 +1,39 @@
+name: Fix a mod listing
+description: A specific mod is shown incorrectly (wrong author, broken download, missing description, etc.)
+labels: ["mod-listing", "needs triage"]
+body:
+  - type: input
+    id: mod_url
+    attributes:
+      label: Mod page URL
+      description: e.g. https://projectdaedalus.app/mods/jimk72/bear-mount/
+      placeholder: "https://projectdaedalus.app/mods/..."
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What's wrong?
+      options:
+        - Wrong author
+        - Wrong version / week
+        - Broken download link
+        - Missing or wrong description
+        - Image not loading
+        - Listed twice (duplicate)
+        - Should not be listed
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What you see vs what you expect. Include screenshots if useful.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Note:** the catalog is built from each modder's `modinfo.json`. If the issue is in that source file (wrong author/version), it's worth pinging the modder directly — the next sync picks up their fix automatically.

@@ -1,0 +1,34 @@
+name: Bug report
+description: Something on the static site is broken
+labels: ["bug", "needs triage"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, plus what you expected.
+      placeholder: "When I do X on page Y, Z happens, but I expected W..."
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Affected page
+      description: The URL where you saw the bug
+      placeholder: "https://projectdaedalus.app/mods/jimk72/bear-mount/"
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options: ["Desktop browser", "Mobile browser", "Tablet"]
+  - type: input
+    id: browser
+    attributes:
+      label: Browser + version (if known)
+      placeholder: "Firefox 128, Safari iOS 17, Chrome 130, ..."
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors (if any)
+      description: F12 → Console. Paste anything red.
+      render: text

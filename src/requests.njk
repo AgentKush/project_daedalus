@@ -1,0 +1,76 @@
+---
+layout: layout.njk
+title: "Mod Requests | ProjectDaedalus"
+description: "Suggest mods you'd like to see made for Icarus. Sign in with GitHub to comment and upvote requests with reactions."
+rootPath: "./"
+permalink: "/requests.html"
+---
+<style>
+  .gold-line { height: 2px; background: linear-gradient(90deg, transparent, #f1ad1c, transparent); }
+</style>
+<div class="max-w-4xl mx-auto px-4 py-6 md:py-10">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 text-icarus-500">Mod Requests</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
+      Suggest mods you'd like to see made for the Icarus survival game. Sign in with GitHub to leave a request, and upvote others by reacting with 👍.
+    </p>
+    <div class="gold-line w-48 mx-auto mt-4"></div>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-3 mb-8">
+    <div class="p-5 border-2 border-icarus-500 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+      <div class="text-3xl mb-2">📝</div>
+      <h3 class="text-base font-bold text-icarus-500 mb-1">Submit a request</h3>
+      <p class="text-xs text-slate-600 dark:text-slate-400">Comment in the discussion below or open a full thread on GitHub for longer proposals.</p>
+    </div>
+    <div class="p-5 border-2 border-icarus-500 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+      <div class="text-3xl mb-2">👍</div>
+      <h3 class="text-base font-bold text-icarus-500 mb-1">Upvote with reactions</h3>
+      <p class="text-xs text-slate-600 dark:text-slate-400">React 👍 on any request to upvote it. Mod authors can sort by reaction count to find what's wanted.</p>
+    </div>
+    <div class="p-5 border-2 border-icarus-500 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+      <div class="text-3xl mb-2">🔨</div>
+      <h3 class="text-base font-bold text-icarus-500 mb-1">Mod authors deliver</h3>
+      <p class="text-xs text-slate-600 dark:text-slate-400">High-upvoted requests get attention. When a mod ships, the request gets marked answered.</p>
+    </div>
+  </div>
+
+  <div class="flex justify-center gap-3 mb-8 flex-wrap">
+    <a href="https://github.com/DonovanMods/project_daedalus/discussions/categories/ideas"
+       target="_blank" rel="noopener"
+       class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-md bg-icarus-500 text-white hover:bg-icarus-600 no-underline">
+      Browse all requests on GitHub →
+    </a>
+    <a href="https://github.com/DonovanMods/project_daedalus/discussions/new?category=ideas"
+       target="_blank" rel="noopener"
+       class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-md border-2 border-icarus-500 text-icarus-500 hover:bg-icarus-500 hover:text-white no-underline">
+      Open a full request thread →
+    </a>
+  </div>
+
+  <div class="p-4 border rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+    <h2 class="text-lg font-bold text-icarus-500 mb-2">Quick requests</h2>
+    <p class="text-xs text-slate-500 mb-4">For one-line ideas. Each comment below is its own request — react with 👍 to upvote others. For longer proposals with screenshots and discussion, open a full thread on GitHub using the buttons above.</p>
+    <div id="giscus-container">
+      <!-- TODO: after installing Giscus on DonovanMods/project_daedalus, replace the two TODO_AFTER_GISCUS_INSTALL placeholders below with the real repo-id + category-id from giscus.app -->
+        <script src="https://giscus.app/client.js"
+              data-repo="DonovanMods/project_daedalus"
+              data-repo-id="TODO_AFTER_GISCUS_INSTALL"
+              data-category="Ideas"
+              data-category-id="TODO_AFTER_GISCUS_INSTALL"
+              data-mapping="specific"
+              data-term="mod-requests-board"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="dark_dimmed"
+              data-lang="en"
+              crossorigin="anonymous"
+              defer></script>
+    </div>
+      <p class="mt-3 text-xs text-slate-500 italic">
+        Comments and reactions are stored in GitHub Discussions, so they may take a moment to register on first interaction.
+      </p>
+    </div>
+</div>

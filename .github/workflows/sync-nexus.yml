@@ -1,0 +1,39 @@
+name: Sync Nexus mods
+
+on:
+  schedule:
+    - cron: "30 5 * * *"   # daily at 05:30 UTC — Nexus changes less often than modder repos
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Refresh Nexus catalog
+        env:
+          NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}        # registered with Nexus, never in repo source
+          NEXUS_APP_SLUG: ${{ vars.NEXUS_APP_SLUG }}          # public-safe identifier (finlay3248-projectdaedalus)
+          NEXUS_RANGE_END: "300"                              # walk mod IDs 1..300; raise as catalog grows
+        run: node scripts/sync-nexus.mjs
+
+      - name: Commit if nexus_mods.json changed
+        run: |
+          if git diff --quiet public/data/nexus_mods.json; then
+            echo "No Nexus changes."
+            exit 0
+          fi
+          git config user.name "daedalus-sync[bot]"
+          git config user.email "daedalus-sync@users.noreply.github.com"
+          git add public/data/nexus_mods.json
+          git commit -m "Sync Nexus mods catalog
+
+          Refreshed via Nexus REST V1 API ($NEXUS_APP_SLUG)."
+          git push

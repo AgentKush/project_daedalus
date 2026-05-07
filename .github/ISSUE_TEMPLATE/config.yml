@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Mod request (suggest a mod you'd like to see made)
+    url: https://projectdaedalus.app/requests.html
+    about: Mod requests live on the Mod Requests board (GitHub Discussions Ideas category) so they can be upvoted with reactions.
+  - name: Question or general discussion
+    url: https://github.com/DonovanMods/project_daedalus/discussions
+    about: Use Discussions for open-ended conversation, mod ideas, or help.

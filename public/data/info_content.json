@@ -1,0 +1,38 @@
+[
+  {
+    "id": "discord",
+    "order": 1,
+    "icon": "\ud83d\udcac",
+    "title": "The Icarus Modding Discord Server",
+    "body": "This is the unofficial modding Discord server for Icarus. It's a great place to get help with modding, ask questions, and meet other modders.",
+    "cta_label": "Join our Discord",
+    "url": "https://discord.gg/linkarus-icarus-modding-936621749733302292"
+  },
+  {
+    "id": "upvote",
+    "order": 2,
+    "icon": "\u2b06\ufe0f",
+    "title": "The Icarus Modding Upvote Page",
+    "body": "Upvote or add new mods you'd like to see for Icarus. It's a great way to let us know what you want to see in the future.",
+    "cta_label": "Modding Upvote Page",
+    "url": "./requests.html"
+  },
+  {
+    "id": "imm-setup",
+    "order": 3,
+    "icon": "\ud83e\uddf0",
+    "title": "Icarus Mod Manager Setup Guide",
+    "body": "Step-by-step PDF guide for installing JimK72's Icarus Mod Manager and getting your first mods running.",
+    "cta_label": "View IMM Setup PDF",
+    "url": "./assets/guides/IMM_Setup_Guide.pdf"
+  },
+  {
+    "id": "gportal-install",
+    "order": 4,
+    "icon": "\ud83d\udda5\ufe0f",
+    "title": "GPortal Mod Install Guide",
+    "body": "PDF walkthrough for installing mods on a GPortal-hosted Icarus dedicated server.",
+    "cta_label": "View GPortal Install PDF",
+    "url": "./assets/guides/GPortal_Mod_Install_Guide.pdf"
+  }
+]

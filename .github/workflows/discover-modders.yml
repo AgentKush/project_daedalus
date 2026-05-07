@@ -1,0 +1,35 @@
+name: Discover new modder repos
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # weekly, Monday 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Run discovery
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/discover-modinfo-repos.mjs
+
+      - name: Open PR if discoveries changed
+        uses: peter-evans/create-pull-request@v8
+        with:
+          sign-commits: true                      # commits are GitHub-API-created, so they're verified
+          commit-message: "Update discovered Icarus mod repos"
+          title: "Auto: new candidate Icarus mod repos discovered"
+          body-path: /tmp/discovery-pr-body.md     # dynamic body listing each candidate URL
+          branch: auto/discovered-modders
+          delete-branch: true
+          add-paths: data/discovered-candidates.json

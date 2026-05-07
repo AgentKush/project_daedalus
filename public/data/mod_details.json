@@ -1,0 +1,55 @@
+{
+  "agentkush--absolute-chaos-core": {
+    "name": "Absolute Chaos - Core",
+    "author": "AgentKush",
+    "version": "v0.2.1",
+    "compatibility": "All",
+    "image_url": "https://github.com/AgentKush/Icarus-mods/raw/main/icons/AbsoluteChaos_Core.png",
+    "readme_html": "<p>Base layer of the Absolute Chaos modpack. Overrides player Base_Stats with 76 chaos buffs (5000kg carry, 600 move speed, fall-damage immunity, zero survival drain, +900% XP and crafting) and zeros research/replication cost on all 335 workshop items. v0.2.1 drops the empty workshop tab and ships a banner.</p><h2>What this mod does</h2><p><strong>Player chaos buffs</strong> - single-row override of <code>D_CharacterStartingStats.Base_Stats</code> with 76 stat keys.</p><ul><li><strong>Carry weight</strong> 5000 (base was 100) + 500% multiplier</li><li><strong>Movement speed</strong> 600 (base was 355), sprint 300%, crouch 150%</li><li><strong>Health</strong> 2000 max, +500/min regen</li><li><strong>Stamina</strong> 2000 max, 10000/min regen, zero delay</li><li><strong>Food / water / oxygen</strong> 3000 max each, zero consumption per hour</li><li><strong>Fall damage</strong> disabled entirely</li><li><strong>XP gain</strong> +900% (10x)</li></ul>",
+    "downloads": [{"type":"EXMODZ","url":"https://github.com/AgentKush/Icarus-mods/raw/main/AbsoluteChaos_Core/AbsoluteChaos_Core.EXMODZ","filename":"AbsoluteChaos_Core.EXMODZ"}],
+    "updated_string": "Last Updated on April 08, 2026"
+  },
+  "agentkush--agents-individual-item-kits": {
+    "name": "Agents Individual Item Kits",
+    "author": "AgentKush",
+    "version": "v5.2",
+    "compatibility": "All",
+    "image_url": "https://github.com/AgentKush/Icarus-mods/raw/main/icons/Agents_Individual_Item_Kits.png",
+    "readme_html": "<p>2,683 individual item kits with real game icons across 20 categorized workshop tabs. Fair pricing based on complexity (5-300 credits).</p><h2>Features</h2><ul><li><strong>2,683 Individual Items</strong> - Every craftable item and raw material available separately</li><li><strong>Real Game Icons</strong> - Each kit displays its actual in-game item icon</li><li><strong>20 Workshop Tabs</strong> - Items sorted into logical categories</li><li><strong>5-Row Grid</strong> - Tighter layout that fits more items on-screen at 1080p</li><li><strong>Dynamic Pricing</strong> - Fair costs based on item complexity and rarity (5-300 credits)</li></ul>",
+    "downloads": [{"type":"EXMODZ","url":"https://github.com/AgentKush/Icarus-mods/raw/main/Agents_Individual_Item_Kits/Agents_Individual_Item_Kits.EXMODZ","filename":"Agents_Individual_Item_Kits.EXMODZ"}],
+    "updated_string": "Last Updated on April 25, 2026"
+  },
+  "jimk72--bear-mount": {
+    "name": "Bear Mount",
+    "author": "Jimk72",
+    "version": "v3.2",
+    "compatibility": "All",
+    "image_url": "https://github.com/Jimk72/Icarus_Mods/raw/main/Bear_Mount_P.png",
+    "readme_html": "<p>Allows the raising of cubs into full grown bear mounts. Bear now eats and drinks from deployables. Fully updated to use the new talents system for mounts. Created Custom Talent tree with Bear background image and center Icon. Still can only use the standard saddle and the cargo saddle.</p>",
+    "downloads": [{"type":"EXMODZ","url":"https://github.com/Jimk72/Icarus_Mods/raw/main/Bear_Mount.EXMODZ","filename":"Bear_Mount.EXMODZ"}],
+    "updated_string": "Last Updated on April 06, 2026"
+  },
+  "waldo--a-wzg-balance-overhaul": {
+    "name": "A WZG balance overhaul",
+    "author": "Waldo",
+    "version": "v680.0",
+    "compatibility": "w117",
+    "image_url": "https://github.com/WZG-Mods/wzg-icarus-balance-overhaul/raw/WZG/wzg_mod.png",
+    "readme_html": "<p>This is a mod we made to play with friends. Main changes: removed as much grind as possible for T3 and T4, and made workshop items much more rewarding to get.</p><p>DISCLAIMER: This mod is for the casual players with limited time, and definitely not for the hardcore survival players.</p><ul><li>Durability of the workshop tools is much higher</li><li>Most of the recipes of tiers 3 and 4 are now cheaper</li><li>Many regular items got buffed</li><li>Crossbow bolts are more expensive and give a much stronger punch</li><li>Thermoses are now buffed and have longer effects</li><li>Plants grown in the plots provide as many resources as when collected with a sickle</li><li>Spoiling time of all food types changed so that food never spoils before it's buff expires</li><li>All Armor Sets where fully rebalanced</li></ul>",
+    "downloads": [{"type":"PAK","url":"https://github.com/WZG-Mods/wzg-icarus-balance-overhaul/releases/download/WZG_680/WZG_Mod_V680_P.pak","filename":"WZG_Mod_V680_P.pak"}],
+    "updated_string": "Last Updated on April 06, 2026"
+  },
+  "cryorus--cry-s-lvl-120-cap-100": {
+    "name": "Cry's Lvl 120 Cap - 100%",
+    "author": "Cryorus",
+    "version": "v1.0",
+    "compatibility": "w95",
+    "image_url": "https://raw.githubusercontent.com/CryorusTheDragon/Icarus_Mods/Crys-Advanced-Leveling/talents.png",
+    "readme_html": "<p><strong>Cry's Advanced Leveling // Lvl 120 Cap</strong></p><p>This suite of mods raise the visible level cap to lvl 120 and change the amount of Solo and General Talent Points granted. Solo Tree is maxed out at lvl 100 for all variants.</p><p>The game as of week 95 has 538 Talent Points in total in the player trees so this mod comes in 4 different flavours: 25%, 50%, 75% and 100% of the total skill points needed.</p>",
+    "downloads": [
+      {"type":"PAK","url":"https://github.com/CryorusTheDragon/Icarus_Mods/raw/Crys-Advanced-Leveling/Crys_Lvl120Cap_M100_P.pak","filename":"Crys_Lvl120Cap_M100_P.pak"},
+      {"type":"EXMODZ","url":"https://github.com/CryorusTheDragon/Icarus_Mods/raw/Crys-Advanced-Leveling/Crys_Lvl120Cap_M100.EXMODZ","filename":"Crys_Lvl120Cap_M100.EXMODZ"}
+    ],
+    "updated_string": "Last Updated on April 06, 2026"
+  }
+}

@@ -1,0 +1,90 @@
+---
+permalink: "/home/index.html"
+layout: layout.njk
+title: "ProjectDaedalus — Icarus Mods & Tools"
+description: "Your home for Icarus mods, tools, and community resources. Browse, download, and enhance your survival experience."
+rootPath: "../"
+---
+<style>
+  .gold-line { height: 2px; background: linear-gradient(90deg, transparent, #f1ad1c, transparent); }
+  .card-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
+  .hero-shimmer { animation: shimmer 3s ease-in-out infinite alternate; }
+  @keyframes shimmer { 0% { opacity: 0.7; } 100% { opacity: 1; } }
+</style>
+
+<section class="max-w-screen-2xl mx-auto px-4 py-6 md:py-12">
+  <div class="pt-6 pb-4 text-center md:pt-8 md:pb-6">
+    <img width="96" height="96" class="mx-auto mb-4 drop-shadow-lg hero-shimmer" alt="Daedalus Logo" src="{{ rootPath }}assets/img/daedalus-logo.png" />
+    <h1 class="mb-3 text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl text-icarus-500">
+      Project Daedalus
+    </h1>
+    <p class="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-slate-600 dark:text-slate-400">
+      Your home for
+      <a class="font-semibold text-icarus-500 hover:text-icarus-400" target="_blank" rel="noopener" href="https://surviveicarus.com/">Icarus</a>
+      mods, tools, and community resources.
+      Browse, download, and enhance your survival experience.
+    </p>
+  </div>
+
+  <div class="mx-auto my-6 gold-line w-72"></div>
+
+  <div class="grid gap-6 mt-6 md:mt-8 md:grid-cols-3">
+    <a class="no-underline group" href="{{ rootPath }}">
+      <div class="flex flex-col items-center p-6 md:p-8 text-center rounded-xl card-lift border-2 border-icarus-500 bg-gradient-to-b from-icarus-100 to-white dark:from-icarus-900 dark:to-slate-800 group-hover:border-icarus-400 h-full">
+        <div class="mb-3 text-4xl md:text-5xl">🎮</div>
+        <h2 class="mb-2 text-xl font-bold md:text-2xl text-icarus-600 dark:text-icarus-400">Browse Mods</h2>
+        <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1">
+          Explore the full collection of community-made mods for Icarus.
+          EXMOD &amp; EXMODZ formats supported.
+        </p>
+        <span class="inline-flex items-center px-4 py-2 mt-4 text-sm font-medium text-white rounded-md bg-icarus-500 group-hover:bg-icarus-600">
+          View All Mods &rarr;
+        </span>
+      </div>
+    </a>
+    <a class="no-underline group" href="{{ rootPath }}tools.html">
+      <div class="flex flex-col items-center p-6 text-center transition-all border rounded-xl card-lift border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 hover:border-blue-400 dark:hover:border-blue-500 h-full">
+        <div class="mb-3 text-3xl md:text-4xl">🛠️</div>
+        <h2 class="mb-2 text-lg font-bold md:text-xl text-blue-600 dark:text-blue-400">Modding Tools</h2>
+        <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1">
+          Calculators, planners, and utilities to create and manage your own Icarus mods.
+        </p>
+        <span class="inline-flex items-center px-4 py-2 mt-4 text-sm font-medium text-white bg-blue-600 rounded-md group-hover:bg-blue-700">
+          View Tools &rarr;
+        </span>
+      </div>
+    </a>
+    <a class="no-underline group" href="{{ rootPath }}info.html">
+      <div class="flex flex-col items-center p-6 text-center transition-all border rounded-xl card-lift border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 hover:border-blue-400 dark:hover:border-blue-500 h-full">
+        <div class="mb-3 text-3xl md:text-4xl">📖</div>
+        <h2 class="mb-2 text-lg font-bold md:text-xl text-blue-600 dark:text-blue-400">Information</h2>
+        <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1">
+          Guides, community links, and everything you need to know about Icarus modding.
+        </p>
+        <span class="inline-flex items-center px-4 py-2 mt-4 text-sm font-medium text-white bg-blue-600 rounded-md group-hover:bg-blue-700">
+          Learn More &rarr;
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="mx-auto my-8 gold-line w-48"></div>
+
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="mb-3 text-xl font-bold md:text-2xl text-icarus-500">Join the Community</h2>
+    <p class="mb-5 text-slate-600 dark:text-slate-400">
+      Connect with fellow Icarus modders, get help, share your creations, and stay up to date.
+    </p>
+    <a target="_blank" rel="noopener" class="no-underline" href="https://discord.gg/linkarus-icarus-modding-936621749733302292">
+      <span class="inline-flex items-center px-6 py-3 text-sm font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
+        💬 Join the Discord Server &rarr;
+      </span>
+    </a>
+  </div>
+
+  <div class="max-w-2xl mx-auto mt-8 mb-4 text-sm text-center text-slate-500 dark:text-slate-400">
+    Want to see a new mod?
+    <a class="font-medium no-underline text-icarus-500 hover:text-icarus-400" href="{{ rootPath }}requests.html">Submit or upvote mod requests</a>
+  </div>
+</section>

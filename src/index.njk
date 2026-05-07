@@ -1,0 +1,82 @@
+---
+layout: layout.njk
+title: "Icarus Mods | ProjectDaedalus"
+description: "Browse 490+ community mods for the Icarus survival game. Filter by author, search, and download."
+rootPath: "./"
+---
+<style>
+  .gold-line { height: 2px; background: linear-gradient(90deg, transparent, #f1ad1c, transparent); }
+</style>
+<div class="max-w-screen-2xl mx-auto px-4 py-6 md:py-10">
+  <div class="mb-6 text-center">
+    <h1 class="mb-3 text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl text-icarus-500">Icarus Mods</h1>
+    <p class="max-w-2xl mx-auto text-base text-slate-600 dark:text-slate-400 md:text-lg">
+      Browse and download community-made mods for the Icarus survival game.
+    </p>
+    <div class="mx-auto mt-4 gold-line w-48"></div>
+  </div>
+
+  <div class="flex flex-col gap-3 p-4 mb-6 border rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 md:flex-row md:items-center md:justify-between">
+    <div class="flex flex-col gap-3 md:flex-row md:items-center md:flex-1">
+      <input id="search" type="search" placeholder="Search mods..." class="px-3 py-2 text-sm border rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-icarus-500 focus:border-icarus-500 focus:outline-none md:w-64">
+      <select id="author-filter" class="appearance-none pl-3 pr-9 py-2 text-sm border rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-icarus-500 focus:border-icarus-500 focus:outline-none" style="background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27%2394a3b8%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20d%3D%27M5.23%207.21a.75.75%200%20011.06.02L10%2011.06l3.71-3.83a.75.75%200%20111.08%201.04l-4.25%204.4a.75.75%200%2001-1.08%200L5.21%208.27a.75.75%200%2001.02-1.06z%27%20clip-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E);background-repeat:no-repeat;background-position:right 0.5rem center;background-size:1.1em;">
+        <option value="">All authors</option>
+      </select>
+      <select id="source-filter" class="appearance-none pl-3 pr-9 py-2 text-sm border rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-icarus-500 focus:border-icarus-500 focus:outline-none" style="background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27%2394a3b8%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20d%3D%27M5.23%207.21a.75.75%200%20011.06.02L10%2011.06l3.71-3.83a.75.75%200%20111.08%201.04l-4.25%204.4a.75.75%200%2001-1.08%200L5.21%208.27a.75.75%200%2001.02-1.06z%27%20clip-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E);background-repeat:no-repeat;background-position:right 0.5rem center;background-size:1.1em;">
+        <option value="">All sources</option>
+        <option value="curated">Curated</option>
+        <option value="nexus">Nexus</option>
+      </select>
+      <select id="week-filter" class="appearance-none pl-3 pr-9 py-2 text-sm border rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-icarus-500 focus:border-icarus-500 focus:outline-none" style="background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27%2394a3b8%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20d%3D%27M5.23%207.21a.75.75%200%20011.06.02L10%2011.06l3.71-3.83a.75.75%200%20111.08%201.04l-4.25%204.4a.75.75%200%2001-1.08%200L5.21%208.27a.75.75%200%2001.02-1.06z%27%20clip-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E);background-repeat:no-repeat;background-position:right 0.5rem center;background-size:1.1em;">
+        <option value="">Any week</option>
+        <option value="latest">Latest (w220+)</option>
+        <option value="recent">Recent (w200–219)</option>
+        <option value="older">Older (&lt; w200)</option>
+      </select>
+      <select id="sort-order" class="appearance-none pl-3 pr-9 py-2 text-sm border rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-icarus-500 focus:border-icarus-500 focus:outline-none" style="background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27%2394a3b8%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20d%3D%27M5.23%207.21a.75.75%200%20011.06.02L10%2011.06l3.71-3.83a.75.75%200%20111.08%201.04l-4.25%204.4a.75.75%200%2001-1.08%200L5.21%208.27a.75.75%200%2001.02-1.06z%27%20clip-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E);background-repeat:no-repeat;background-position:right 0.5rem center;background-size:1.1em;">
+        <option value="name-asc">Name A–Z</option>
+        <option value="name-desc">Name Z–A</option>
+        <option value="week-desc">Newest first</option>
+        <option value="week-asc">Oldest first</option>
+      </select>
+    </div>
+    <div class="flex items-center gap-3">
+      <span id="count" class="text-sm font-medium text-icarus-500">0 mods</span>
+      <button id="reset" class="text-sm font-medium text-icarus-500 hover:text-icarus-400 bg-transparent border-0 cursor-pointer">Show all</button>
+    </div>
+  </div>
+
+  <div class="hidden mb-4 text-sm text-center md:block text-slate-500 dark:text-slate-400">
+    Don't see a feature you're looking for? Go upvote or add it on
+    <a href="./requests.html" class="font-medium no-underline text-icarus-500 hover:text-icarus-400">the Mod Requests board</a>
+  </div>
+  <p class="mb-4 text-xs text-center text-icarus-500">Click on any row to view additional mod details</p>
+
+  <div class="overflow-hidden border rounded-xl border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 mt-2">
+    <table class="w-full border-collapse table-auto">
+      <thead>
+        <tr class="bg-slate-100 dark:bg-slate-800">
+          <th class="p-3 text-left text-sm font-semibold text-icarus-500 sm:w-1/5">Name</th>
+          <th class="p-3 text-left text-sm font-semibold text-icarus-500 w-auto sm:w-28">Download</th>
+          <th class="hidden p-3 text-left text-sm font-semibold text-icarus-500 sm:table-cell sm:w-1/6">Author</th>
+          <th class="hidden p-3 text-right text-sm font-semibold text-icarus-500 md:table-cell w-20">Version</th>
+          <th class="hidden p-3 text-center text-sm font-semibold text-icarus-500 xl:table-cell w-20">Week</th>
+          <th class="hidden p-3 text-left text-sm font-semibold text-icarus-500 xl:table-cell">Description</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-2">
+    <p id="page-info" class="text-sm text-slate-500 text-center sm:text-left"></p>
+    <nav id="pagination" class="flex flex-wrap items-center justify-center sm:justify-end gap-y-1"></nav>
+  </div>
+
+  <div class="mt-6 text-sm text-center text-slate-500 dark:text-slate-400">
+    Want to see a new mod?
+    <a href="./requests.html" class="font-medium no-underline text-icarus-500 hover:text-icarus-400">Submit or upvote mod requests</a>
+  </div>
+</div>
+
+<script type="module" src="./assets/app.js"></script>

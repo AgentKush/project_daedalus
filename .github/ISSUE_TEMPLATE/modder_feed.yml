@@ -1,0 +1,28 @@
+name: Add a modder feed
+description: Add yourself or someone else to data/modders.json so their mods sync to the site
+labels: ["modder-feed", "needs triage"]
+body:
+  - type: input
+    id: author
+    attributes:
+      label: Modder name
+      description: As you'd like it to appear on the site
+      placeholder: "Your Name"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: modinfo.json URL
+      description: Stable raw GitHub URL, e.g. https://raw.githubusercontent.com/you/repo/main/modinfo.json
+      placeholder: "https://raw.githubusercontent.com/..."
+    validations:
+      required: true
+  - type: checkboxes
+    id: sanity
+    attributes:
+      label: Sanity check
+      options:
+        - label: I've verified the URL returns valid JSON with a `mods` array
+        - label: Each mod entry has at least `name`, `author`, `version`, and `files`
+        - label: I'm okay with my mods appearing on this static-site rebuild for as long as the URL stays live

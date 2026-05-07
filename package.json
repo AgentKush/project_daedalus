@@ -1,0 +1,17 @@
+{
+  "name": "project_daedalus",
+  "version": "0.1.0",
+  "description": "Static-site live site for Project Daedalus on GitHub Pages",
+  "private": true,
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve --port=8080",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
