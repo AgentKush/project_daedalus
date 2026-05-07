@@ -1,4 +1,4 @@
-import { subscribe, attachStatusBadge } from "./firebase-loader.js";
+import { subscribe } from "./firebase-loader.js";
 
 function escape(s) { return (s || "").toString().replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
@@ -23,9 +23,7 @@ function renderCard(c) {
   </a>`;
 }
 
-const setStatus = attachStatusBadge();
 subscribe("info_content", "./data/info_content.json", transform, (cards, status) => {
-  setStatus(status);
   cards.sort((a, b) => a.order - b.order);
   document.getElementById("info-grid").innerHTML = cards.map(renderCard).join("");
 });
