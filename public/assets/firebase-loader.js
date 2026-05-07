@@ -1,4 +1,4 @@
-// Data loader for ProjectDaedalus. Three modes, in priority order:
+// Data loader for the static POC. Three modes, in priority order:
 //   1. Firebase Web SDK with onSnapshot — sub-second push updates (when FIREBASE_CONFIG is set)
 //   2. Firestore REST API — public-read collections, no auth required (when FIRESTORE_PROJECT_ID is set)
 //   3. Bundled JSON in /data/ — offline / fallback / empty-collection fallback
@@ -70,6 +70,29 @@ async function fetchBundled(fallbackUrl) {
   return Array.isArray(raw) ? raw : Object.entries(raw).map(([id, v]) => ({ id, ...v }));
 }
 
+
+// ---- Backfill helper: merge derived fields from bundled JSON onto live data ----
+// Firestore is authoritative when populated; bundled JSON fills gaps for fields
+// the modder didn't author (e.g. compatibility derived from git commit history).
+function _mergeKey(item) {
+  const slug = (s) => (s || "").toString().toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return `${slug(item.author)}::${(item.name || "").toLowerCase()}`;
+}
+function backfillFromBundled(liveItems, bundledItems) {
+  if (!bundledItems || !bundledItems.length) return liveItems;
+  const idx = new Map();
+  for (const b of bundledItems) idx.set(_mergeKey(b), b);
+  for (const live of liveItems) {
+    const b = idx.get(_mergeKey(live));
+    if (!b) continue;
+    for (const [k, v] of Object.entries(b)) {
+      const cur = live[k];
+      if (cur === undefined || cur === null || cur === "") live[k] = v;
+    }
+  }
+  return liveItems;
+}
+
 // ---- Web SDK init (only when explicitly configured) ----
 let webSdk = null;
 async function getWebSdk() {
@@ -95,8 +118,8 @@ export function subscribe(collection, fallbackUrl, transform, callback) {
       if (subscriptions.has(collection)) subscriptions.get(collection)();
       const unsub = sdk.onSnapshot(sdk.collection(sdk.db, collection),
         async snap => {
-          const items = snap.docs.map(d => transform({ id: d.id, ...d.data() }));
-          if (items.length === 0 && fallbackUrl) {
+          const rawItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          if (rawItems.length === 0 && fallbackUrl) {
             // collection exists but is empty — supplement with bundled
             try {
               const bundled = await fetchBundled(fallbackUrl);
@@ -104,7 +127,13 @@ export function subscribe(collection, fallbackUrl, transform, callback) {
               return;
             } catch (e) { /* fall through to empty live */ }
           }
-          callback(items, { live: true, source: "websdk" });
+          // Live data present — backfill missing fields from bundled JSON
+          let bundled = null;
+          if (fallbackUrl) {
+            try { bundled = await fetchBundled(fallbackUrl); } catch (e) { /* live only */ }
+          }
+          const merged = bundled ? backfillFromBundled(rawItems, bundled) : rawItems;
+          callback(merged.map(transform), { live: true, source: bundled ? "websdk+backfill" : "websdk" });
         },
         err => { console.warn(`[firestore-websdk] ${collection}: ${err.message}; falling through`); restMode(); }
       );
@@ -132,7 +161,14 @@ export function subscribe(collection, fallbackUrl, transform, callback) {
               callback([], { live: true, source: "rest", empty: true });
             }
           } else {
-            callback(items.map(transform), { live: true, source: "rest" });
+            // Live data present — backfill missing fields from bundled JSON if available
+            // (e.g. compatibility derived from git history, image_url, readme_url).
+            let bundled = null;
+            if (fallbackUrl) {
+              try { bundled = await fetchBundled(fallbackUrl); } catch (e) { /* keep going with live only */ }
+            }
+            const merged = bundled ? backfillFromBundled(items, bundled) : items;
+            callback(merged.map(transform), { live: true, source: bundled ? "rest+backfill" : "rest" });
           }
         } catch (err) {
           console.warn(`[firestore-rest] ${collection}: ${err.message}; falling back to bundled JSON`);
@@ -171,6 +207,7 @@ export function attachStatusBadge() {
     if (status.source === "websdk")  { badge.style.background = "#16a34a"; badge.textContent = "● LIVE Firestore (WebSDK)"; }
     else if (status.source === "rest") { badge.style.background = "#16a34a"; badge.textContent = "● LIVE Firestore (REST)"; }
     else if (status.source === "rest+bundled" || status.source === "websdk+bundled") { badge.style.background = "#f59e0b"; badge.textContent = "◐ LIVE + bundled (empty collection)"; }
+    else if (status.source === "rest+backfill" || status.source === "websdk+backfill") { badge.style.background = "#16a34a"; badge.textContent = "● LIVE + backfilled"; }
     else if (status.source === "bundled") { badge.style.background = "#64748b"; badge.textContent = "○ Bundled snapshot"; }
     else                             { badge.style.background = "#dc2626"; badge.textContent = "✕ Data error"; }
   };
