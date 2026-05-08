@@ -171,6 +171,24 @@ function refresh() {
   }
 }
 
+// Pre-warm: load both bundled JSONs in parallel so the first paint includes
+// curated AND nexus rows even before any live subscription has resolved.
+// The subscribe() calls below then overlay live data once Firestore returns.
+(async () => {
+  try {
+    const [curated, nexus] = await Promise.all([
+      fetch("./data/mods.json").then(r => r.json()).catch(() => []),
+      fetch("./data/nexus_mods.json").then(r => r.json()).catch(() => [])
+    ]);
+    if (state.mods.length === 0) state.mods = curated.map(d => ({ ...transformMod(d), source: "curated" }));
+    if (state.nexusMods.length === 0) state.nexusMods = nexus.map(d => ({
+      ...transformMod(d), source: "nexus",
+      mod_page_url: d.mod_page_url || `https://www.nexusmods.com/icarus/mods/${d.nexus_id}`
+    }));
+    refresh();
+  } catch (e) { /* silent — subscribe() will populate when REST returns */ }
+})();
+
 subscribe("mods", "./data/mods.json", d => ({ ...transformMod(d), source: "curated" }), (mods, status) => {
   state.mods = mods;
   setStatus(status);
