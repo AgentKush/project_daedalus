@@ -1,0 +1,32 @@
+---
+permalink: "/feed.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.name }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ site.built_at }}</updated>
+  <id>{{ site.url }}/</id>
+  <author>
+    <name>{{ site.author }}</name>
+  </author>
+  {%- for entry in detailMods -%}{%- if loop.index <= 50 -%}
+    {%- set m = entry -%}
+  <entry>
+    <title>{{ m.name | safe }}</title>
+    <link href="{{ site.url }}/mods/{{ m.author_slug }}/{{ m.slug }}/"/>
+    <updated>{{ site.built_at }}</updated>
+    <id>{{ site.url }}/mods/{{ m.author_slug }}/{{ m.slug }}/</id>
+    <author><name>{{ m.author | safe }}</name></author>
+    {% if m.compatibility %}<category term="{{ m.compatibility }}"/>{% endif %}
+    {% for ft in m.file_types %}<category term="{{ ft }}"/>{% endfor %}
+    <summary type="html"><![CDATA[
+      <p>By {{ m.author }}{% if m.version %} · v{{ m.version }}{% endif %}{% if m.compatibility %} · {{ m.compatibility }}{% endif %}</p>
+      <p>{{ m.description | safe }}</p>
+    ]]></summary>
+  </entry>
+  {%- endif -%}{%- endfor -%}
+</feed>

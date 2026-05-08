@@ -11,7 +11,7 @@ eleventyComputed:
   description: "{{ mod.description | striptags | truncate(160) }}"
   og_image: "{{ mod.image_url }}"
 ---
-<section class="max-w-5xl mx-auto px-4 py-6 md:py-10">
+<section class="max-w-5xl mx-auto px-4 py-6 md:py-10" data-pagefind-body data-pagefind-meta="title:{{ mod.name | safe }}" data-pagefind-meta-author="{{ mod.author | safe }}">
   <!-- Header: name + file type badges + download buttons -->
   <div class="flex items-center justify-between flex-auto flex-wrap gap-3">
     <div class="flex items-center gap-3 flex-1 min-w-0">
@@ -37,7 +37,7 @@ eleventyComputed:
 
   <!-- Author + version line -->
   <div class="flex items-center justify-between flex-auto mt-1 flex-wrap gap-2">
-    <div class="text-lg text-icarus-400 lg:text-xl">By {{ mod.author }}</div>
+    <div class="text-lg text-icarus-400 lg:text-xl">By <a href="{{ rootPath }}authors/{{ mod.author_slug }}/" class="text-icarus-400 hover:text-icarus-500 underline-offset-2 hover:underline">{{ mod.author }}</a></div>
     <div class="text-slate-500">{{ mod.version_string }}</div>
   </div>
 

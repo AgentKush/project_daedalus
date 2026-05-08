@@ -1,0 +1,26 @@
+---
+permalink: "/sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ site.url }}/</loc><changefreq>hourly</changefreq><priority>1.0</priority></url>
+  <url><loc>{{ site.url }}/home/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{ site.url }}/tools.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>{{ site.url }}/info.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>{{ site.url }}/requests.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  {%- for entry in detailMods -%}
+  <url>
+    <loc>{{ site.url }}/mods/{{ entry.author_slug }}/{{ entry.slug }}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {%- endfor -%}
+  {%- for a in authors -%}
+  <url>
+    <loc>{{ site.url }}/authors/{{ a.slug }}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  {%- endfor -%}
+</urlset>

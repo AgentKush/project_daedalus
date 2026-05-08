@@ -1,0 +1,62 @@
+---
+pagination:
+  data: authors
+  size: 1
+  alias: profile
+permalink: "/authors/{{ profile.slug }}/index.html"
+layout: layout.njk
+rootPath: "../../"
+eleventyComputed:
+  title: "{{ profile.author }} | Project Daedalus"
+  description: "{{ profile.mod_count }} mod(s) by {{ profile.author }} for Icarus."
+---
+<section class="max-w-5xl mx-auto px-4 py-6 md:py-10">
+  <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
+    <div>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-icarus-500">{{ profile.author }}</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+        {{ profile.mod_count }} mod{% if profile.mod_count != 1 %}s{% endif %} on Project Daedalus
+        {% if profile.newest_mod and profile.newest_mod.compatibility %}
+          · most recent at <span class="text-icarus-500">{{ profile.newest_mod.compatibility | lower }}</span>
+        {% endif %}
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {% for type, count in profile.file_type_counts %}
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase
+          {% if type == 'exmodz' %}bg-icarus-500/20 text-icarus-500 dark:text-icarus-400
+          {% elif type == 'pak' %}bg-emerald-500/20 text-emerald-600 dark:text-emerald-400
+          {% else %}bg-slate-500/20 text-slate-600 dark:text-slate-400{% endif %}">
+          {{ type }} · {{ count }}
+        </span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="grid gap-3 md:grid-cols-2">
+    {% for m in profile.mods %}
+      <a href="{{ rootPath }}mods/{{ m.author_slug }}/{{ m.slug }}/" class="block p-4 border rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800 no-underline">
+        <div class="flex items-start justify-between gap-3 mb-1">
+          <div class="font-semibold text-slate-800 dark:text-slate-200">{{ m.name }}</div>
+          <div class="flex gap-1 flex-shrink-0">
+            {% for t in m.file_types %}
+              <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase
+                {% if t == 'exmodz' %}bg-icarus-500/20 text-icarus-500
+                {% elif t == 'pak' %}bg-emerald-500/20 text-emerald-600
+                {% else %}bg-slate-500/20 text-slate-600{% endif %}">{{ t }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="flex items-center gap-2 mb-2 text-xs text-slate-500 dark:text-slate-400">
+          {% if m.version %}<span>v{{ m.version }}</span>{% endif %}
+          {% if m.compatibility %}
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-icarus-500/20 text-icarus-500 dark:text-icarus-400 font-medium">{{ m.compatibility | lower }}</span>
+          {% endif %}
+        </div>
+        {% if m.description %}
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{{ m.description | truncate(180) }}</p>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>

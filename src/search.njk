@@ -1,0 +1,44 @@
+---
+permalink: "/search/index.html"
+layout: layout.njk
+rootPath: "../"
+title: "Search | Project Daedalus"
+description: "Full-text search across every mod listing and README on Project Daedalus."
+---
+<section class="max-w-3xl mx-auto px-4 py-8">
+  <h1 class="text-3xl md:text-4xl font-extrabold text-icarus-500 mb-2">Search</h1>
+  <p class="text-slate-600 dark:text-slate-400 mb-6">
+    Searches mod names, descriptions, and the full text of every rendered README. Tries to be
+    smart about typos and partial matches.
+  </p>
+
+  <div id="search"></div>
+  <p class="mt-6 text-xs text-slate-500 dark:text-slate-400">Powered by <a href="https://pagefind.app" class="text-icarus-500 hover:underline">Pagefind</a> — index built at deploy time.</p>
+</section>
+
+<link href="{{ rootPath }}pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="{{ rootPath }}pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    new PagefindUI({
+      element: "#search",
+      showImages: false,
+      showSubResults: true,
+      autofocus: true,
+      pageSize: 12,
+      resetStyles: false,
+      translations: { placeholder: "Search mods (e.g. 'speed crafting' or 'no decay')…" }
+    });
+  });
+</script>
+
+<style>
+  .pagefind-ui form { background: rgba(15, 23, 42, .4); border: 1px solid rgb(51, 65, 85); border-radius: 0.5rem; }
+  .pagefind-ui__search-input { background: transparent; color: rgb(226, 232, 240); }
+  .pagefind-ui__search-clear { color: rgb(148, 163, 184); }
+  .pagefind-ui__result { background: transparent; border-color: rgb(51, 65, 85); }
+  .pagefind-ui__result-title a { color: rgb(241, 173, 28); }
+  .pagefind-ui__result-excerpt { color: rgb(148, 163, 184); }
+  .pagefind-ui__result-excerpt mark { background: rgba(241, 173, 28, .25); color: inherit; }
+  .pagefind-ui__button { background: rgb(241, 173, 28); color: rgb(15, 23, 42); }
+</style>

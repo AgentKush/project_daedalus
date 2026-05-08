@@ -1,0 +1,32 @@
+# After every sync-mods commit, diff public/data/mods.json against the previous
+# commit and post a Discord embed for any new or updated mod.
+#
+# Set the repository secret DISCORD_WEBHOOK_URL to enable.
+# If unset, the workflow exits cleanly without doing anything.
+
+name: Notify Discord on new/updated mods
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/data/mods.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Diff and post to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node scripts/notify-discord.mjs

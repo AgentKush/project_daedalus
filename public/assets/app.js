@@ -57,7 +57,7 @@ function renderRow(mod) {
   return `<tr class="${cls}"${onclick}>
     <td class="p-2 sm:p-3 font-medium text-slate-800 dark:text-slate-200">${escape(mod.name)}${badge}</td>
     <td class="p-2 sm:p-3 whitespace-nowrap">${action}</td>
-    <td class="hidden p-3 text-sm sm:table-cell text-slate-600 dark:text-slate-400">${escape(mod.author || "unknown")}</td>
+    <td class="hidden p-3 text-sm sm:table-cell text-slate-600 dark:text-slate-400">${mod.author ? `<a href="./authors/${slug(mod.author)}/" class="hover:text-icarus-500 hover:underline" onclick="event.stopPropagation()">${escape(mod.author)}</a>` : "unknown"}</td>
     <td class="hidden p-3 text-sm text-right md:table-cell text-slate-600 dark:text-slate-400">${escape(mod.version || "")}</td>
     <td class="hidden p-3 text-sm text-center xl:table-cell">${compat}</td>
     <td class="hidden p-3 text-sm xl:table-cell text-slate-600 dark:text-slate-400 max-w-md truncate" title="${escape(mod.description || "")}">${escape(desc)}</td>

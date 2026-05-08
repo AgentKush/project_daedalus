@@ -4,9 +4,10 @@
   "description": "Static-site live site for Project Daedalus on GitHub Pages",
   "private": true,
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && npx -y pagefind --site _site --output-subdir pagefind",
     "serve": "eleventy --serve --port=8080",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "index": "npx -y pagefind --site _site --output-subdir pagefind"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
